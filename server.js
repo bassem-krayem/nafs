@@ -1,30 +1,26 @@
 require('dotenv').config();
-const { Sequelize } = require('sequelize');
-const app = require('./app');
+const sequelize = require('./src/config/db');
+const app = require('./src/app');
 
 const PORT = process.env.PORT || 3000;
 
-const sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PASSWORD,
-  {
-    host: process.env.DB_HOST || 'localhost',
-    port: process.env.DB_PORT || 5432,
-    dialect: 'postgres',
-    logging: false,
-  },
-);
+// Test connection and start
+async function startServer() {
+  try {
+    await sequelize.authenticate();
+    console.log('✅ Database connection established successfully.');
 
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Database connection established successfully.');
+    // In Sprint 1, we sync models here
+    await sequelize.sync({ alter: true });
+    console.log('📂 Database models synced.');
+
     app.listen(PORT, () => {
-      console.log(`Server is running on http://localhost:${PORT}`);
+      console.log(`🚀 Server running on http://localhost:${PORT}`);
     });
-  })
-  .catch((err) => {
-    console.error('Unable to connect to the database:', err);
+  } catch (err) {
+    console.error('❌ Unable to connect to the database:', err);
     process.exit(1);
-  });
+  }
+}
+
+startServer();
