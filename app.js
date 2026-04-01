@@ -1,6 +1,10 @@
 const express = require('express');
 const path = require('path');
 
+// calling the required functions, routes,  and assigning them to variables
+const AppError = require('./src/utils/appError');
+const globalErrorHandler = require('./src/controllers/errorController');
+
 const app = express();
 
 // View engine
@@ -15,5 +19,13 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
   res.render('index', { title: 'Nafs' });
 });
+
+// Handling unhandled routes
+app.all('*', (req, res, next) => {
+  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+});
+
+// Global error handling middleware
+app.use(globalErrorHandler);
 
 module.exports = app;
