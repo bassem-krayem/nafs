@@ -1,7 +1,9 @@
 const express = require('express');
 const validate = require('../middlewares/joiValidate');
 const validations = require('../validations/validations');
+const selectProfileToValidate = require('../middlewares/selectProfileToValidate');
 const authController = require('../controllers/authController');
+const userController = require('../controllers/userController');
 
 const router = express.Router();
 
@@ -26,14 +28,10 @@ router.patch(
 
 // 2. Profile Completion (The "Next Step" for your popup)
 // These routes will handle the forms for Doctors and Patients
-router.post('/complete-patient-profile', (req, res) => {
-  // Logic for saving PatientProfile and setting isProfileComplete = true
-  res.send('Patient profile logic goes here');
-});
-
-router.post('/complete-therapist-profile', (req, res) => {
-  // Logic for saving TherapistProfile and setting isProfileComplete = true
-  res.send('Therapist profile logic goes here');
-});
+router.post(
+  '/complete-profile',
+  selectProfileToValidate,
+  userController.completeProfile,
+);
 
 module.exports = router;

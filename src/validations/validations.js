@@ -27,8 +27,25 @@ const updatePassword = Joi.object().keys({
     .messages({ 'any.only': 'Passwords do not match' }),
 });
 
+const therapistProfile = Joi.object({
+  specialization: Joi.string().required(),
+  licenseNumber: Joi.string().required(),
+  yearsOfExperience: Joi.number().min(0),
+  bio: Joi.string().min(10),
+  pricePerSession: Joi.number().positive(),
+});
+
+const patientProfile = Joi.object({
+  dateOfBirth: Joi.date().less('now'),
+  gender: Joi.string().valid('male', 'female', 'other'),
+  emergencyContact: Joi.string(),
+  bio: Joi.string().max(500),
+});
+
 module.exports = {
   signup,
   login,
   updatePassword,
+  therapistProfile,
+  patientProfile,
 };

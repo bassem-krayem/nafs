@@ -1,0 +1,17 @@
+{
+  "status": "success",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU4MGU1Y2I3LTYxZTktNGIxZS04YzFlLWEyOWNmYzA3ODU0MiIsInJvbGUiOiJ0aGVyYXBpc3QiLCJpc1Byb2ZpbGVDb21wbGV0ZSI6ZmFsc2UsImlhdCI6MTc3NTExMzk0MSwiZXhwIjoxNzgyODg5OTQxfQ.UEdqsLLBmH3wcV6MATICr07Qs_fKJpR_tbhKexiVpFk",
+  "data": {
+    "user": {
+      "id": "580e5cb7-61e9-4b1e-8c1e-a29cfc078542",
+      "firstName": "Bassem",
+      "lastName": "Developer",
+      "email": "bassem@nafs.com",
+      "role": "therapist",
+      "isProfileComplete": false,
+      "isActive": true,
+      "createdAt": "2026-04-01T09:55:15.137Z",
+      "updatedAt": "2026-04-01T09:55:15.137Z"
+    }
+  }
+}
